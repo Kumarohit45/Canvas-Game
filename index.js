@@ -124,6 +124,11 @@ function animate() {
     projectiles.forEach((projectile, projectileIndex) => {
       const distance = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
       if (distance - enemy.radius - projectile.radius < 1) {
+        if (enemy.radius > 10) {
+          setTimeout(() => {
+            projectiles.splice(projectileIndex, 1)
+          }, 0)
+        }
         setTimeout(() => {
           enemies.splice(enemyIndex, 1)
           projectiles.splice(projectileIndex, 1)
@@ -138,8 +143,8 @@ addEventListener('click', (event) => {
   // console.log(projectiles)
   const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
   const velocity = {
-    x: Math.cos(angle) * 4,
-    y: Math.sin(angle) * 4
+    x: Math.cos(angle) * 5,
+    y: Math.sin(angle) * 5
   }
   projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 5, 'white', velocity))
 })
